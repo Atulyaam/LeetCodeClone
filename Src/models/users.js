@@ -7,17 +7,19 @@ const userSchema = new Schema({
     minLength:3,
     maxLength:20,
     trim:true,
+    required:true,
   },
   lastName:{
     type:String,
     minLength:3,
     maxLength:20,
     trim:true,
+    required:true,
   
   },
   emailID:{
     type:String,
-    require:true,
+    required:true,
     unique:true,
     lowercase:true,
     immutable:true,
@@ -25,7 +27,7 @@ const userSchema = new Schema({
   },
   password:{
     type:String,
-    require:true,
+    required:true,
     trim:true,
     minLength:8,
 
@@ -34,7 +36,6 @@ const userSchema = new Schema({
     type:Number,
     min:6,
     max:70,
-    require:true,
   },
   role:{
     type:String,
