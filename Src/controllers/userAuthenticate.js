@@ -54,7 +54,7 @@ const login = async (req,res)=>{
 }
 const logout = async(req,res)=>{
    try {
-      
+
       
    } catch (error) {
       res.status(401).send("Error: "+error)
@@ -62,9 +62,9 @@ const logout = async(req,res)=>{
    }
 
 } 
-const getProfile =(req,res)=>{
+const getProfile =async (req,res)=>{
 
 } 
-const changePassword =(req,res)=>{
+const changePassword =async (req,res)=>{
 
 }
