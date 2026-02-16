@@ -1,5 +1,6 @@
 // using validator librarry
 const validator = repuire("validator")
+
 const validate = (data)=>{
    const mandatoryFeilds = ["firstName","emailId","password"]
    // yaha hum check ker rahe hai ki mandatoryFeilds ki info user data me present hai ki nai using every
