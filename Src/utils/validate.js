@@ -1,5 +1,5 @@
 // using validator librarry
-const validator = repuire("validator")
+const validator = require("validator")
 
 const validate = (data)=>{
    const mandatoryFeilds = ["firstName","emailId","password"]

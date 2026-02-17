@@ -1,5 +1,9 @@
 const express = require('express')
 const authRouter = express.Router();
+const userMiddleware  = require("../middleware/userMiddleware")
+const adminMiddleware = require('../middleware/adminMiddleware')
+const {login,logout,register,getProfile,changePassword,adminRegister }
+= require("../controllers/userAuthenticate")
 
 // Register
 authRouter.post("/register",register)
@@ -7,12 +11,14 @@ authRouter.post("/register",register)
 // Login
 authRouter.post("/login",login)
 // Logout
-authRouter.post("/logout",logout)
+authRouter.post("/logout",userMiddleware,logout)
 // getProfile
 authRouter.post("/profile",getProfile)
 
 // change password
 authRouter.post("/change-password",changePassword)
+
+authRouter.post("/admin/register",adminMiddleware,adminRegister);
 
 module.exports=authRouter;
 

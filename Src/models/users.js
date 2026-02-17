@@ -17,7 +17,7 @@ const userSchema = new Schema({
     required:true,
   
   },
-  emailID:{
+  emailId:{
     type:String,
     required:true,
     unique:true,
