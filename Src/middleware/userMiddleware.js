@@ -18,8 +18,7 @@ const userMiddleware = async (req,res,next)=>{
       if(!result){
          throw new Error("User not Exist")
       }
-
-      // now goint to using redis client
+      // now going to using redis client
       const IsBlocked = await redisClient.exists(`token:${token}`);
       if(IsBlocked){
          throw new Error("Invalid token")
@@ -27,8 +26,8 @@ const userMiddleware = async (req,res,next)=>{
       req.user = result;
       next();
    }catch (error) {
-      res.send("Error: "+error.message) 
-      
+      res.send("Error: "+error.message)
+
    }
 }
 

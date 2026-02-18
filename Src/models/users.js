@@ -14,7 +14,6 @@ const userSchema = new Schema({
     minLength:3,
     maxLength:20,
     trim:true,
-    required:true,
   
   },
   emailId:{
