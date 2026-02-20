@@ -68,7 +68,19 @@ const problemSchema = new Schema({
       // multiple schema have so refer user schema
       ref:'user',
       require:true
-   }
+   },
+   referenceSolution:[
+      {
+         language:{
+            type:String,
+            require:true
+         },
+         codeSolution:{
+            type:String,
+            require:true
+         }
+      }
+   ],
 })
 
 const Problem = mongoose.model('problem',problemSchema)
