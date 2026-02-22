@@ -75,7 +75,7 @@ const problemSchema = new Schema({
             type:String,
             require:true
          },
-         codeSolution:{
+         code:{
             type:String,
             require:true
          }
