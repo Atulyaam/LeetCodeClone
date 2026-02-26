@@ -16,7 +16,7 @@ problemRouter.get("/allProblem",userMiddleware,fetchAllProblem)
 
 // above all wants admin middleware
 // problem update
-problemRouter.put("/updat/:id",adminMiddleware,updateProblem)
+problemRouter.put("/update/:id",adminMiddleware,updateProblem)
 // problem delete
 problemRouter.delete("/delete/:id",adminMiddleware,deleteProblembyId)
 

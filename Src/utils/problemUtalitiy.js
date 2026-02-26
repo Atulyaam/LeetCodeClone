@@ -39,9 +39,10 @@ const submitBatch = async (submission)=>{
 async function fetchData() {
 	try {
 		const response = await axios.request(options);
-		return response.data;
+    return response.data;
 	} catch (error) {
-		console.error(error);
+    console.error(error);
+    return null;
 	}
 }
 
@@ -71,12 +72,16 @@ async function fetchData() {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		return null;
 	}
 }
 
 
   while(true){
     const result = await fetchData();
+    if (!result || !Array.isArray(result.submissions)) {
+      return null;
+    }
     const IsResultObtained = result.submissions.every((r)=>{
     return r.status_id>2
     })

@@ -36,13 +36,16 @@ const createProblem = async (req,res)=>{
          const resultToken = submitResult.map((value)=>value.token);
 
          const testResult = await  submitToken(resultToken)
+         if (!testResult || !Array.isArray(testResult)) {
+            return res.status(400).send("Failed to fetch judge results");
+         }
 
          for(const test of testResult){
             if(test.status_id!=3){
                return res.status(400).send("Error Occured")
             }
          }
-         // console.log(testResult)
+         console.log(testResult)
 
          // after correction now we can store it on our DB
       }
@@ -71,7 +74,7 @@ const fetchProblembyId = async (req,res)=>{
       if(!id){
          return res.status(400).send("Id is Missing");
       }
-      const getProblem = await Problem.findById(id);
+      const getProblem = await Problem.findById(id).select(' title description difficulty  tags visibalTestCases startCode');
       if(!getProblem){
          return res.status(404).send("Problem is Missing")
       }
@@ -86,7 +89,7 @@ const fetchProblembyId = async (req,res)=>{
 const fetchAllProblem  =async (req,res)=>{
    //  Since problem can be thousand and lacks which can create a problem so we use Paginatio here and Lazy Loading in Frontend to avoid the freez problem
    try {
-      const getProblem =await Problem.find({});
+      const getProblem =await Problem.find({}).select('title description difficulty  tags visibalTestCases startCode');
       if(getProblem.length==0){
          return res.status(404).send("Problem is Missing")
       }
@@ -137,13 +140,16 @@ const updateProblem = async (req,res)=>{
          const resultToken = submitResult.map((value)=>value.token);
 
          const testResult = await  submitToken(resultToken)
+         if (!testResult || !Array.isArray(testResult)) {
+            return res.status(400).send("Failed to fetch judge results");
+         }
 
          for(const test of testResult){
             if(test.status_id!=3){
                return res.status(400).send("Error Occured")
             }
          }
-         // console.log(testResult)
+         console.log(testResult)
 
          // after correction now we can store it on our DB
       }
