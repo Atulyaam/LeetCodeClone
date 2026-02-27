@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const ProblemSubmissionSchema = new Schema({
    userId:{
       type:Schema.Types.ObjectId,
-      ref:'User',
+      ref:'user',
       require:true,
    },
    problemId:{

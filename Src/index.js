@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const authRouter = require("./routes/userAuth")
 const redisClient = require("./config/redis")
 const problemRouter = require("./routes/problemCreator")
+const submitRouter = require("./routes/submit")
 
 // ye direct jo JSON formate me data aata hai usko java script object me convert ker degaa
 
@@ -14,6 +15,9 @@ app.use(cookieParser());
 
 app.use('/user',authRouter)
 app.use('/problem',problemRouter)
+// support legacy/plural path
+app.use('/problems', problemRouter)
+app.use('/submission',submitRouter)
 
 const InitializeConnction = async ()=>{
   try {

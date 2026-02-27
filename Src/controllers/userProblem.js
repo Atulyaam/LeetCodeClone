@@ -1,5 +1,6 @@
 const Problem = require("../models/problems");
 const {getLanguageById,submitBatch,submitToken} = require("../utils/problemUtalitiy")
+const User = require('../models/users');
 
 
 const createProblem = async (req,res)=>{
@@ -45,7 +46,7 @@ const createProblem = async (req,res)=>{
                return res.status(400).send("Error Occured")
             }
          }
-         console.log(testResult)
+         // console.log(testResult)
 
          // after correction now we can store it on our DB
       }
@@ -190,8 +191,24 @@ const deleteProblembyId = async (req,res)=>{
 
 
 const solvedProblembyUser = async (req,res)=>{
-
-
+   try {
+      // `userMiddleware` attaches the authenticated user to `req.user`
+      const userId = req.user && (req.user._id || req.user.id);
+      if(!userId){
+         return res.status(401).send("User not authenticated");
+      }
+      const user = await User.findById(userId).select('-password').populate({
+         path:"problemSolved",
+         select:"_id title difficulty tags"
+      });
+      if(!user){
+         return res.status(404).send("User not found");
+      }
+      res.status(200).send(user.problemSolved);
+   } catch (error) {
+      res.status(500).send("Error: "+error)
+      
+   }
 }
 
 module.exports = {createProblem,deleteProblembyId,updateProblem,solvedProblembyUser,fetchAllProblem,fetchProblembyId}

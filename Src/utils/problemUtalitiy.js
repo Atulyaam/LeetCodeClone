@@ -1,7 +1,5 @@
 const axios = require('axios')
 
-
-
 const Wating = async(timer)=>{
   return new Promise((resolve)=>{
     setTimeout(()=>{
@@ -57,7 +55,7 @@ const options = {
   url: 'https://judge029.p.rapidapi.com/submissions/batch',
   params: {
     tokens: resultToken.join(","),
-    base64_encoded: 'true',
+    base64_encoded: 'false',
     fields: '*'
   },
   headers: {
