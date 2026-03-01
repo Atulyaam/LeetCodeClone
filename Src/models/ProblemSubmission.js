@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Problem = require('./problems');
+const userMiddleware = require('../middleware/userMiddleware');
 const Schema = mongoose.Schema;
 
 const ProblemSubmissionSchema = new Schema({
@@ -50,6 +51,11 @@ const ProblemSubmissionSchema = new Schema({
    
 },{
    timestamps:true
+})
+
+// doing indexing in combination of userid and problem id
+ProblemSubmissionSchema.index({
+   userId:1,problemId:1
 })
 
 const ProblemSubmission =mongoose.model('ProblemSubmission',ProblemSubmissionSchema);

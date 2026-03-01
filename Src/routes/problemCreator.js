@@ -3,7 +3,7 @@ const express = require('express');
 const problemRouter = express.Router();
 const adminMiddleware = require("../middleware/adminMiddleware")
 const userMiddleware = require("../middleware/userMiddleware")
-const {createProblem, fetchProblembyId, fetchAllProblem, updateProblem, deleteProblembyId, solvedProblembyUser} = require('../controllers/userProblem');
+const {createProblem, fetchProblembyId, fetchAllProblem, updateProblem, deleteProblembyId, solvedProblembyUser,submittedProblem} = require('../controllers/userProblem');
 
 
 
@@ -21,5 +21,10 @@ problemRouter.put("/update/:id",adminMiddleware,updateProblem)
 problemRouter.delete("/delete/:id",adminMiddleware,deleteProblembyId)
 
 problemRouter.get("/ProblemSolvedByUser",userMiddleware,solvedProblembyUser)
+// all code submission by user for perticuler problem
+// pid====problem id
+problemRouter.get("/submittedProblem/:pid",userMiddleware,submittedProblem)
+
+
 
 module.exports = problemRouter;

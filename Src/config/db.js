@@ -4,6 +4,7 @@ async function main() {
     await mongoose.connect(process.env.DB_CONNECT, {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
+      autoIndex: false
     })
     console.log("MongoDB Connected Successfully")
   } catch (error) {

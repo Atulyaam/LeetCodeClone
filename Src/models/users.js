@@ -46,11 +46,20 @@ const userSchema = new Schema({
       type:Schema.Types.ObjectId,
       ref:'problem'
     }],
-    unique:true
-
+    default:[]
   }
 },{
   timestamps:true
+})
+
+// writing a function that runn everytime when a any user is deleted
+
+userSchema.post('findOneAndDelete', async function(userInfo){
+  if(userInfo){
+    await mongoose.model('userSubmission').deleteMany({
+      userId: userInfo._id
+    })
+  }
 })
 
 const User  =mongoose.model("user",userSchema);

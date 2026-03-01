@@ -4,7 +4,7 @@ const validate = require("../utils/validate")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const redisClient = require("../config/redis")
-
+const ProblemSubmission  = require("../models/ProblemSubmission")
 const register = async (req,res)=>{
    try {
       // first validating user given info
@@ -110,4 +110,20 @@ const adminRegister = async (req,res)=>{
 
 }
 
-module.exports={login,logout,register,getProfile,changePassword,adminRegister}
+const deleteProfile = async (req,res)=>{
+   try {
+      const userId = req.result._id
+      // user schema deleted
+      await User.findByIdAndDelete(userId)
+
+      // now deletinh user userSubmission
+      // deleting from user Schema
+      // ProblemSubmission.deleteMany({userId})
+
+      res.status(200).send("deleted Succsessfully")
+   } catch (error) {
+      res.status(501).send("Error: "+error)
+   }
+}
+
+module.exports={login,logout,register,getProfile,changePassword,adminRegister,deleteProfile}

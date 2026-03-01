@@ -2,7 +2,7 @@ const express = require('express')
 const authRouter = express.Router();
 const userMiddleware  = require("../middleware/userMiddleware")
 const adminMiddleware = require('../middleware/adminMiddleware')
-const {login,logout,register,getProfile,changePassword,adminRegister }
+const {login,logout,register,getProfile,changePassword,adminRegister,deleteProfile }
 = require("../controllers/userAuthenticate")
 
 // Register
@@ -19,6 +19,9 @@ authRouter.post("/profile",getProfile)
 authRouter.post("/change-password",changePassword)
 
 authRouter.post("/admin/register",adminMiddleware,adminRegister);
+
+// deleting the user
+authRouter.delete("/deleteProfile",userMiddleware,deleteProfile)
 
 module.exports=authRouter;
 
